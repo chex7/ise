@@ -1145,7 +1145,8 @@ class ERS(object):
                  first_name='',
                  last_name='',
                  email='',
-                 description=''):
+                 description='',
+                 custom_attributes=None):
         """
         Add a user to the local user store.
 
@@ -1157,6 +1158,7 @@ class ERS(object):
         :param last_name: Last name
         :param email: email address
         :param description: User description
+        :param custom_attributes: Custom attributes (dict)
         :return: result dictionary
         """
         result = {
@@ -1170,7 +1172,8 @@ class ERS(object):
 
         data = {"InternalUser": {'name': user_id, 'password': password, 'enablePassword': enable,
                                  'firstName': first_name, 'lastName': last_name, 'email': email,
-                                 'description': description, 'identityGroups': user_group_oid}}
+                                 'description': description, 'identityGroups': user_group_oid,
+                                 'customAttributes': custom_attributes}}
 
         resp = self._request('{0}/config/internaluser'.format(self.url_base), method='post',
                              data=json.dumps(data))
